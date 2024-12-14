@@ -27,26 +27,21 @@ jobs:
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
-          echo 'BUN_INSTALL=$HOME/.bun' >> $GITHUB_ENV
-          echo 'PATH=$BUN_INSTALL/bin:$PATH' >> $GITHUB_ENV
-          source ~/.bashrc
-          export BUN_INSTALL=$HOME/.bun
-          export PATH=$BUN_INSTALL/bin:$PATH
-
-      # Bun のバージョン確認（デバッグ用）
-      - name: Verify Bun installation
-        run: |
-          echo "Bun version:"
-          bun --version
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+          echo 'export BUN_INSTALL=$HOME/.bun' >> $GITHUB_ENV
+          echo 'export PATH=$BUN_INSTALL/bin:$PATH' >> $GITHUB_ENV
 
       # 依存関係をインストール
       - name: Install dependencies
         run: |
-          source $GITHUB_ENV
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
           bun install
 
       # ESLint 静的解析
       - name: Run ESLint
         run: |
-          source $GITHUB_ENV
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
           bun eslint .
