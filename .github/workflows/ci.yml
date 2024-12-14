@@ -23,6 +23,13 @@ jobs:
         with:
           node-version: 18
 
+      # Bun をインストール
+      - name: Install Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+
       # 依存関係のインストール
       - name: Install dependencies
         run: bun install
