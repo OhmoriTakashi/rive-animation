@@ -27,32 +27,28 @@ jobs:
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
           echo 'export BUN_INSTALL=$HOME/.bun' >> $GITHUB_ENV
-          echo 'export PATH=$HOME/.bun/bin:$PATH' >> $GITHUB_ENV
+          echo 'export PATH=$BUN_INSTALL/bin:$PATH' >> $GITHUB_ENV
 
-      # 環境変数をロード
-      - name: Load Bun environment
-        shell: bash
-        run: |
-          source ~/.bashrc
-          export PATH=$HOME/.bun/bin:$PATH
-          echo "PATH after sourcing .bashrc:"
-          echo $PATH
-
-      # Bun のバージョン確認
+      # 環境変数を明示的に適用
       - name: Verify Bun installation
         run: |
-          source $GITHUB_ENV
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
           bun --version
 
       # 依存関係をインストール
       - name: Install dependencies
         run: |
-          source $GITHUB_ENV
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
           bun install
 
       # TypeScript 型チェック
       - name: Run TypeScript type checking
         run: |
-          source $GITHUB_ENV
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
           bun tsc --noEmit
