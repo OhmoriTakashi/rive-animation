@@ -1,0 +1,54 @@
+name: TypeScript Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  type-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # コードを取得
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Node.js のセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Bun をインストール
+      - name: Install Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+          echo 'export BUN_INSTALL=$HOME/.bun' >> $GITHUB_ENV
+          echo 'export PATH=$BUN_INSTALL/bin:$PATH' >> $GITHUB_ENV
+
+      # 環境変数を明示的に適用
+      - name: Verify Bun installation
+        run: |
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+          bun --version
+
+      # 依存関係をインストール
+      - name: Install dependencies
+        run: |
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+          bun install
+
+      # TypeScript 型チェック
+      - name: Run TypeScript type checking
+        run: |
+          export BUN_INSTALL="$HOME/.bun"
+          export PATH="$BUN_INSTALL/bin:$PATH"
+          bun tsc --noEmit
