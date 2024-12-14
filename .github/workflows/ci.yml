@@ -34,4 +34,3 @@ jobs:
       # ESLint の静的解析
       - name: Run ESLint
         run: bun eslint .
-EOL
