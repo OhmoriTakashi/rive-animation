@@ -1,0 +1,54 @@
+.slider-container {
+  width: 200px;
+  position: relative;
+  text-align: center;
+}
+
+.skill-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  border-radius: 4px;
+  outline: none;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.skill-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.skill-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  margin-top: -7px; /* スライダーの中央に配置 */
+  background-color: #fff; /* 確実に表示されるように修正 */
+  border: 2px solid currentColor;
+}
+
+.skill-slider::-webkit-slider-thumb:hover {
+  opacity: 0.8;
+}
+
+.marks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.mark {
+  font-size: 14px;
+  color: #666;
+}
+
+.mark.disabled {
+  color: #aaa;
+}
