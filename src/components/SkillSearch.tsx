@@ -72,6 +72,7 @@ export const SkillSearch = ({
         label="スキルを検索"
         variant="outlined"
         fullWidth
+        size="small"
         inputRef={inputRef}
         value={searchQuery}
         onClick={handleOpen} // クリックでメニューを開く
