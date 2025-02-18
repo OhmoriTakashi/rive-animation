@@ -14,7 +14,17 @@ export const SelectedSkillList = ({
   onRemove,
 }: Props) => {
   return (
-    <List>
+    <List
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        maxHeight: "100%",
+        overflowY: "auto",
+        gap: 4,
+        p: 0,
+      }}
+    >
       {selectedSkills.map((skill) => (
         <SkillListItem
           key={skill.id}

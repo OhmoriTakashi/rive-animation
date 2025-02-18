@@ -1,5 +1,7 @@
 // import { useStateMachineInput, useRive } from "@rive-app/react-canvas";
-import { SkillForm } from "./pages/SkillForm";
+import { SkillForm } from "./components/SkillForm";
+import { Box } from "@mui/material";
+import ThemeWrapper from "./theme/ThemeWrapper";
 
 export default function RatingAnimation() {
   // // 状態マシンの名前とトリガー入力名
@@ -28,8 +30,10 @@ export default function RatingAnimation() {
   // };
 
   return (
-    <div>
-      <SkillForm />
-    </div>
+    <ThemeWrapper>
+      <Box sx={{ height: "100%" }}>
+        <SkillForm />
+      </Box>
+    </ThemeWrapper>
   );
 }
